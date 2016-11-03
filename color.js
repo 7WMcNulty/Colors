@@ -1,3 +1,4 @@
+var list = [30,70,150];
 //Declare the Color Object with our new keyword below here.
 const Color = new Object();
 
@@ -23,20 +24,59 @@ Color.isColor = function(rgb){
 };
 
 Color.redIntensity = function(rgb){
-  let redpct = Math.round((rgb[0]/255)*100);
-  return redpct;
+  let redIntensity = Math.round((rgb[0]/255)*100);
+  return redIntensity;
 };
 //greenIntensity
 Color.greenIntensity = function(rgb){
-  let greenpct = Math.round((rgb[1]/255)*100);
-  return greenpct;
+  let greenIntensity = Math.round((rgb[1]/255)*100);
+  return greenIntensity;
 }
 //blueIntensity
 Color.blueIntensity = function(rgb){
-  let bluepct = Math.round((rgb[2]/255)*100);
-  return bluepct;
+  let blueIntensity = Math.round((rgb[2]/255)*100);
+  return blueIntensity;
 }
 //brightness
-
-
+Color.brightness = function(rgb){
+  let bright = (Color.redIntensity(rgb)+Color.greenIntensity(rgb)+Color.blueIntensity(rgb))/3;
+  return bright;
+}
 //complement
+Color.complement = function(rgb){
+  let comp = [];
+  for(var i = 0; i<3; i++){
+    comp[i] = 255-rgb[i];
+  }
+  return comp;
+}
+//gray scale
+Color.grayScale = function(rgb){
+  let avg = (rgb[0]+rgb[1]+rgb[2])/3;
+  let gray = [];
+  for(var g=0; g<3; g++){
+    gray[g] = avg;
+  }
+  return gray;
+}
+//tint
+Color.tint = function(rgb){
+  let white = [255,255,255];
+  let tint = [];
+  for(var w = 0; w<3; w++){
+    tint[w] = (rgb[w]+white[w])/2;
+  }
+  return tint;
+}
+//tone
+Color.tone = function(rgb){
+  let grey = [128,128,128];
+  let tone = [];
+  for(var t = 0; t<3; t++){
+    tone[t] = (rgb[t]+grey[t])/2;
+  }
+  return tone;
+}
+//shade
+
+console.log(Color.tone(list));
